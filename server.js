@@ -28,6 +28,15 @@ app.set("view engine","handlebars");
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.connect(MONGODB_URI);
 
+// make handlebars file the root route - GARBAGE, emma delete or fix
+app.get("/", function(req,res){
+    db.Article.find({})
+    .then(function(dbArticle) {
+      res.render("index", { dbArticle : data });
+    })
+})
+
+
 // Routes - copied from NUEVA repo (week 18 activity 20) as placeholder
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
