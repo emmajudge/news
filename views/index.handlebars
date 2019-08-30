@@ -1,6 +1,8 @@
-<div class="card">
-    {{#each result}}
-    
-
+<ul>
+    {{#each dbArticle}}
+        <div class="card">
+            <div class="card-header">{{this.title}}</div>
+            <div class="card-body">{{this.link}}</div>
+        </div>
     {{/each}}
-</div>
+</ul>
