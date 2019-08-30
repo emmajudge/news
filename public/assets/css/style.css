@@ -4,12 +4,13 @@
 }
 
 .navbar-nav > li > a.nav-link,
-#navbar > a.navbar-brand {
+#navbar > a.navbar-brand, 
+#navbar > button.navbar-toggler > span.navbar-toggler-icon{
   padding: 10px;
   margin-top: 10px;
   margin-left: 10px;
   font-weight: 800;
-  color: #43182f;
+  color: #43182fd7;
 }
 
 .jumbotron {
