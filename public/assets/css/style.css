@@ -15,7 +15,8 @@
 
 .jumbotron {
     background-image: url("../img/PLEASURE81_00_COVER.jpg");
-    height: 300px
+    height: 300px;
+    margin-top: 10px;
 }
 
 .jumbotron .caption {
