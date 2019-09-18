@@ -1,10 +1,11 @@
 <ul>
-    {{#each articles}}
+    {{#each savedArticle}}
     <div class="card">
         <div class="card-header">
             <h4>
                 {{title}}
-                <a class="btn btn-success save" href="/save/:id">Save Article</a>
+                <a class="btn btn-danger delete" href="#">Delete From Saved</a>
+                <a class="btn btn-info notes" href="#">Article Notes</a>
             </h4>
         </div>
         <div class="card-body">{{description}}</div>
