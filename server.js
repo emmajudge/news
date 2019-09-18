@@ -20,8 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
- 
-
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
@@ -36,7 +34,6 @@ app.get("/", function (req, res) {
       res.render("index", { articles: dbArticle });
     })
 })
-
 
 // Routes - copied from NUEVA repo (week 18 activity 20) as placeholder
 // A GET route for scraping the echoJS website
@@ -84,23 +81,33 @@ app.get("/scrape", function (req, res) {
     });
 
     // Send a message to the client
-    res.send("Scrape Complete");
+    // res.send("Scrape Complete");
+    res.render("scrape", { status: "Scrape Complete" })
   });
 });
 
+app.put("/save/:id", function(req,res){
+  db.Article.findOne({_id: req.params.id})
+  .update({saved: true})
+  .catch(function(err){
+    res.json(err);
+  })
+})
+
 // Route for getting all Articles from the db
-app.get("/", function (req, res) {
+app.get("/articles/saved", function (req, res) {
   // Grab every document in the Articles collection
-  db.Article.find({})
+  db.Article.find({saved: true})
     .then(function (dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
-      res.render("index",{ articles:  dbArticle});
+      res.render("saved",{ savedArticle:  dbArticle});
     })
     .catch(function (err) {
       // If an error occurred, send it to the client
       res.json(err);
     });
 });
+
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function (req, res) {

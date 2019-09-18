@@ -1,5 +1,16 @@
-// NOTE - code copied from NUEVA repo (week 18 activity 20) as temporary placeholder
+// note: referenced hw solution for guidance on handleScrape function
+var articleContainer = $(".article-container");
+// this allows articles to post to page when scrape button is clicked
+// function handleArticleScrape(){
+//   $.get("/scrape").then(function(dbArticle){
+//     resizeBy.render("index", { articles: dbArticle})
+//   })
+// }
 
+
+// need to updated this section with new routes added on 9/18
+
+// NOTE - code copied from NUEVA repo (week 18 activity 20) as template
 // Grab the articles as a json
 $.getJSON("/articles", function(data) {
     // For each one
