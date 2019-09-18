@@ -1,8 +1,10 @@
 <ul>
-    {{#each dbArticle}}
+    {{#each articles}}
         <div class="card">
-            <div class="card-header">{{this.title}}</div>
-            <div class="card-body">{{this.link}}</div>
+            <div class="card-header">{{title}}</div>
+            <div class="card-body">{{link}}</div>
+                 <div class="card-body">{{description}}</div>
+
         </div>
     {{/each}}
 </ul>
