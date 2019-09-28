@@ -24,7 +24,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Connect to Mongo DB from heroku and store in variable
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapeTest";
 mongoose.connect(MONGODB_URI);
 
 // make handlebars file the root route - GARBAGE, emma delete or fix
@@ -39,28 +39,31 @@ app.get("/", function (req, res) {
 // A GET route for scraping the echoJS website
 app.get("/scrape", function (req, res) {
   // First, we grab the body of the html with axios - this is for the culture section only
-  axios.get("https://www.bitchmedia.org/culture").then(function (response) {
+  axios.get("https://www.gentlebarn.org/blog/").then(function (response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
-    $("div.views-row").each(function (i, element) {
+    $("div.post").each(function (i, element) {
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this)
-        .children("h2")
+        // .children("div.post")
+        .children("h2.title")
         .text();
       result.link = $(this)
-        .children("div.views-field")
+        .children("div.post")
+        .children("h2.title")
         .children("a")
         .attr("href")
       result.description = $(this)
-      .children("div.views-field-nothing")
-      // .children("a")
-      // .parent()
-      .text()
+        .children("div.entry")
+        .children("div.row")
+        .children("div.large-12 columns")
+        .children("p")
+        .text()
       // result.image=$(this)
       //   .children("div.views-field-field-featured-image-external")
       //   .children("a")
